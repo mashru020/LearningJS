@@ -844,7 +844,7 @@ console.log([...question.keys()]);
 console.log([...question.values()]);*/
 
 
-// 119. Coding Challenge #3 
+/*// 119. Coding Challenge #3 
 const gameEvents = new Map ([
     [17,'⚽ GOAL'],
     [36, '🔁Substitution'],
@@ -888,4 +888,50 @@ console.log(`An event happend. on average, ever ${time/gameEvents.size} minutes.
 for(const [key, value] of gameEvents) {
     const str = key<= 45? "FIRST" : "SECOND";
     console.log(`[${str} HALF] ${key} : ${value}`);
-}
+}*/
+
+// 120. Working with string - Part 1
+
+const airline = "TAP Air Bangladesh";
+const plane = "A320";
+
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+console.log('B373'[0]);
+
+console.log(airline.length);
+console.log('B373'.length);
+
+console.log(airline.indexOf('r'));
+console.log(airline.indexOf('A'));//Give us the first index
+console.log(airline.lastIndexOf('a'));//Give us the last index
+
+console.log(airline.indexOf('Air')); //also can find the entire word
+
+// slice method
+console.log(airline.slice(4)); //return from 4th index 
+console.log(airline.slice(4,7)); //return string from 4 to 7 index; end parameter 7th index
+
+// extracting first word without knowing the string
+console.log(airline.slice(0,airline.indexOf(' '))); //first word
+console.log(airline.slice(airline.lastIndexOf(' ') + 1 ));// last word
+
+console.log(airline.slice(-2)); //extracting from the end
+console.log(airline.slice(1 , -2)); // last -parameter menas, cuts of last 2 character;
+
+const checkMiddleSeat = function(seat) {
+    // B and E are middle seats 
+    const s = seat.slice(-1);
+    if(s === 'B' || s === 'E') 
+        console.log('You got the middle seat 😬');
+    else console.log('You are lucky 😎');
+};
+
+checkMiddleSeat('11B'); 
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+console.log(new String('mashru'));
+console.log(typeof new String('mashru'));
+console.log(typeof new String('mashru').slice(1));
