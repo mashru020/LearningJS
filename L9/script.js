@@ -890,7 +890,8 @@ for(const [key, value] of gameEvents) {
     console.log(`[${str} HALF] ${key} : ${value}`);
 }*/
 
-// 120. Working with string - Part 1
+
+/*// 120. Working with string - Part 1
 
 const airline = "TAP Air Bangladesh";
 const plane = "A320";
@@ -934,4 +935,117 @@ checkMiddleSeat('3E');
 
 console.log(new String('mashru'));
 console.log(typeof new String('mashru'));
-console.log(typeof new String('mashru').slice(1));
+console.log(typeof new String('mashru').slice(1));*/
+
+
+/*// 121.Working with string - Part 2
+
+const airline = "TAP Air Bangladesh";
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+
+// Fix capitalization in name 
+const passenger =  'mAshRu';
+const passengerLower = passenger.toLowerCase();
+const passengerCorrect = passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect);
+
+// Comparing email
+const email = 'hello@mashru.io';
+const loginEmail = ' Hello@Mashru.Io \n';
+
+// const lowerEmail = loginEmail.toLocaleLowerCase();
+// const trimmedEmail = lowerEmail.trim();
+//console.log(trimmedEmail);
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+
+console.log(email === normalizedEmail);
+
+// Replacing
+const priceGB ='288,79£';
+const priceUS = priceGB.replace('£','$').replace(',','.');
+console.log(priceGB);
+console.log(priceUS);
+
+const announcement = 'All passengers come to boarding door 23. Boarding door 23!';
+console.log(announcement.replace('door', 'gate'));
+// console.log(announcement.replaceAll('door', 'gate'));
+
+console.log(announcement.replace(/door/g, 'gate')); // word between / means ragular expression ang g stants for global
+
+
+// Booleans 
+const plane = 'Airbus A320neo';
+console.log(plane.includes('A320'));
+console.log(plane.includes('Boeing'));
+console.log(plane.startsWith('Air'));
+
+if(plane.startsWith('Airbus') && plane.endsWith('neo')) {
+    console.log('Part of the NEW Airbus family');
+}
+
+// Practice exercise 
+const checkBaggage = function (items) {
+    const baggage = items.toLowerCase();
+    if(baggage.includes('knife') || baggage.includes('gun')) {
+        console.log('You are NOT allow on board');
+    }
+    else {
+        console.log('Welcome aboard!');
+    }
+};
+
+checkBaggage('I have a laptop, some Food and a pocket knife');
+checkBaggage('Socks and camera');
+checkBaggage('Got some snacks and a gun for protection');*/
+
+// 122. Working with string - part 3
+
+console.log('a+very+nice+string'.split('+'));
+console.log('Md Mashrur Rahman Khan'.split(' '));
+
+const [firstName, lastName] = 'Mashrur Rahman'.split(' ');
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+const capitalizeName = function(name) {
+    const names = name.split(' ');
+    const nameUpper = [];
+    for(const n of names) {
+       //nameUpper.push( n[0].toUpperCase() + n.slice(1));
+       nameUpper.push(n.replace(n[0],n[0].toUpperCase()));
+    }
+    console.log(nameUpper.join(' '));
+}
+capitalizeName('jessica ann smith davis');
+capitalizeName('Md. Mashru rahman');
+
+// Padding 
+const massage = 'Go to gate 23!';
+console.log(massage.padStart(25, '+'));
+console.log('Mashru'.padStart(25, '+'));
+console.log(massage.padStart(20, '+').padEnd(30, '+'));
+console.log('mashru'.padStart(20, '+').padEnd(30, '+'));
+
+const maskCreditCard = function(number) {
+    const str = number + '';
+    const last = str.slice(-4);
+    return last.padStart(str.length, '*');
+
+}
+
+console.log(maskCreditCard(2323435431451345));
+console.log(maskCreditCard('744349173498230894'));
+
+// Repeat 
+const message2 = 'Bad waether... All Departues Delay... ';
+console.log(message2.repeat(5));
+
+const planesInLine = function(n) {
+    console.log(`There are ${n} planes in line ${'✈'.repeat(n)}`);
+}
+planesInLine(5);
+planesInLine(3);
+planesInLine(12);
