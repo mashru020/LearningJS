@@ -1001,7 +1001,7 @@ checkBaggage('I have a laptop, some Food and a pocket knife');
 checkBaggage('Socks and camera');
 checkBaggage('Got some snacks and a gun for protection');*/
 
-// 122. Working with string - part 3
+/*// 122. Working with string - part 3
 
 console.log('a+very+nice+string'.split('+'));
 console.log('Md Mashrur Rahman Khan'.split(' '));
@@ -1048,4 +1048,76 @@ const planesInLine = function(n) {
 }
 planesInLine(5);
 planesInLine(3);
-planesInLine(12);
+planesInLine(12);*/
+
+
+// 123. Coding challange #4 
+
+/*  Taks - 1
+Write a program that recives a list of variable names written in underscore_case and convert them to camelCase. The input will come from a textarea inserted into the DOM, and conversion will happen when the putten pressed
+ 
+----test data-----
+
+underscore_case
+ first_name
+Some_Variable
+  Calculate_AGE
+delayed_departure
+
+*/
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+
+
+document.querySelector('button').addEventListener('click', function() {
+    const text = document.querySelector('textarea').value;
+    console.log(text);
+
+    
+    
+    // function trim
+    const textArrTrim = function(str) {
+       const arrTrim = [];
+        for(const item of str) {
+            arrTrim.push(item.trim());
+        }
+        return arrTrim;
+    };
+
+    // lowercase Convert Function
+    const toLow = function(str) {
+        const arrLow = [];
+        for(const items of str) {
+            arrLow.push(items.toLowerCase());
+        }
+        return arrLow ;
+        
+    };
+    // camelCase Convet Function
+    const toCam = function(str) {
+        const strSplit = str.split('_');
+        const capitalization = [];
+        for(let item of strSplit) {
+             capitalization.push(item.replace(item[0],item[0].toUpperCase()));
+        }
+        const camCase = capitalization.join('');
+        return camCase.replace(camCase[0], camCase[0].toLocaleLowerCase());
+ 
+     }
+
+    const textArr = [...text.split('\n')];
+    const textTrimed = textArrTrim(textArr);
+    const textLow = toLow(textTrimed);
+
+    const textFinal = [];
+    for (const item of textLow) {
+       textFinal.push( toCam(item).padEnd(20,'.'));
+    }
+    for(let i = 0; i<textFinal.length ; i++) {
+         textFinal[i] += '✅'.repeat(i+1);
+         //console.log(textFinal[i]);
+     }
+    console.log(textFinal.join('\n'));
+
+});
