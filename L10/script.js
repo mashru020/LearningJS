@@ -60,7 +60,7 @@ checkIn(flight, mashru);*/
 
 // 128. First-Class and Higher-Order Functions
 
-// 129. Functions Accepting Callback Functions
+/*// 129. Functions Accepting Callback Functions
 const oneWord = function(str) {
     return str.replace(/ /g, '').toLowerCase();
 };
@@ -86,4 +86,83 @@ const high5 = function() {
     console.log('👋');
 }
 document.body.addEventListener('ckick',high5);
-['Mashr', 'Mahir', 'Nusrat'].forEach(high5);
+['Mashr', 'Mahir', 'Nusrat'].forEach(high5);*/
+
+/*// 130. Funciton returning function
+
+const greet = function(greeting) {
+    return function(name) {
+        console.log(`${greeting} ${name}`);
+    }
+}
+const greeterHey = greet('Hey');
+greeterHey('Mashru');
+greeterHey('Mahir');
+
+greet('Hello')('Mashru');
+
+// arrow function
+const greetArr = greeting => name => console.log(`${greeting} ${name}`);
+
+greetArr('Hi')('Mashru');*/
+
+// The call and apply Methods
+
+const lufthansa = {
+    airline: 'Lufthansa',
+    iataCode: 'LH',
+    bookings: [],
+    //book: function() {}
+    book(flightNum, name) {
+        console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`);
+        this.bookings.push({ flignt: `${this.iataCode}${flightNum}`, name });
+    },
+};
+
+lufthansa.book(239, 'Mashrur Rahman');
+lufthansa.book(456,'Mahir Faisal');
+console.log(lufthansa);
+
+
+const eurowings = {
+    airline: 'Eurowings',
+    iataCode: 'EW',
+    bookings: [],
+};
+
+const book = lufthansa.book;
+// Dose not work
+// book(23, "Tahmaid khan"); 
+
+
+//=============call method====================
+
+// this keyword set to wurowings
+book.call(eurowings, 23, 'Tahmid Khan');
+console.log(eurowings);
+
+book.call(lufthansa, 89, 'Adib Mahmud');
+console.log(lufthansa);
+
+const swiss = {
+    airline: 'Swiss Air Lines',
+    iataCode: 'LX',
+    bookings: [],
+}
+
+book.call(swiss, 56, 'Nusrat');
+console.log(swiss);
+
+// ================  Apply Method  ==========================
+// takes the array of argument
+
+const fligntData = [583, 'George Cooper'];
+book.apply(swiss, fligntData);
+console.log(swiss);
+
+// better way to doing apply method in modern js
+book.call(swiss, ...fligntData);
+console.log(swiss);
+
+
+// 
