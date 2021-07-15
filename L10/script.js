@@ -215,7 +215,7 @@ const addText2 = function(rate) {
 const addVat2 = addText2(.23);
 console.log(addVat2(200));*/
 
-// 133. Coding Challange #1
+/*// 133. Coding Challange #1
 //1. Create a method called 'registerNewAnswer' on the 'pool' object. The method dose 2 things:
     // 1.1. Display a prompt window for the user to input the number of the selection option. The prompt should look like this: 
     //     What is your favourite Programming Language?
@@ -274,4 +274,25 @@ poll.displayResult.call({answers: [5, 2, 3]}, 'string');
      poll.displayResult.call(newPoll, 'string');
 
 
-    console.log(newPoll);
+    console.log(newPoll);*/
+    
+    // 134.Immediately Invoked Function Expressions (IIEF)
+
+    const runOnce = function() {
+        console.log('This will never run again');
+    }
+    runOnce();
+
+    //iife
+    (function() {
+        console.log('This will never run again 2nd');
+    })();
+    // arrow function
+    (() => console.log('This will also never run again'))();
+
+    {
+        const isPrivate = 23;
+        var notPrivate = 46;
+    }
+    //console.log(isPrivate); //not accessable
+    console.log(notPrivate);
