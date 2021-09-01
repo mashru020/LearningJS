@@ -276,7 +276,7 @@ poll.displayResult.call({answers: [5, 2, 3]}, 'string');
 
     console.log(newPoll);*/
     
-    // 134.Immediately Invoked Function Expressions (IIEF)
+    /*// 134.Immediately Invoked Function Expressions (IIEF)
 
     const runOnce = function() {
         console.log('This will never run again');
@@ -295,4 +295,71 @@ poll.displayResult.call({answers: [5, 2, 3]}, 'string');
         var notPrivate = 46;
     }
     //console.log(isPrivate); //not accessable
-    console.log(notPrivate);
+    console.log(notPrivate);*/
+
+    /* / 135. Closures
+    const secureBooking = function() {
+        let passengerCount = 0;
+
+        return function() {
+            passengerCount++;
+            console.log(`${passengerCount} passengers`);
+        }
+    }
+
+    const booker = secureBooking();
+    booker();
+    booker();
+    booker();
+
+    console.dir(booker);*/
+
+    /*// 36. More Closure example
+// Example 1
+    let f;
+
+    const g = function() {
+        const a = 23;
+        f = function() {
+            console.log(a*2);
+        }
+    }
+
+    g();
+    f();
+
+    const h = function() {
+        const b = 777;
+        f = function() {
+            console.log(b * 2);
+        }
+    }
+// Re-assigning f function
+    h();
+    f();
+
+// Example 2
+
+const boardPassengers = function(n , wait) {
+    let perGroup = n / 3;
+
+    setTimeout(function(){
+        console.log(`We are now boarding all ${n} passengers`);
+        console.log(`There are 3 groups, each with ${perGroup} passengers`);
+    },wait * 1000);
+    console.log(`Will start boarding in ${wait} seconds`);
+}
+
+//let perGroup = 1000;
+boardPassengers(180, 3); */
+
+// 137. coding challange #2
+
+(function() {
+    const header = document.querySelector('h1');
+    header.style.color = 'red';
+
+    document.querySelector('body').addEventListener('click', function() {
+        header.style.color = 'blue';
+    });
+})();
