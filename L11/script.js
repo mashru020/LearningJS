@@ -86,7 +86,7 @@ displayMovements(account1.movements);
 // LECTURES
 
 
-//const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 
 // //////////////////////////////////////////////////////////////////////////////////
@@ -194,7 +194,7 @@ currenciesUnique.forEach(function(value, _ , map){
 });*/
 
 
-// 145. Coding Challenge #1 
+/*// 145. Coding Challenge #1 
 const checkDog = function(dogsJulia, dogsKate) {
     const dogsJuliaNew = dogsJulia.slice();
     dogsJuliaNew.splice(0,-1);
@@ -213,4 +213,39 @@ const checkDog = function(dogsJulia, dogsKate) {
         }
     });
 }
-checkDog([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+checkDog([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);*/
+
+
+/*// 147. The Map Method
+// map returns new array with new elements
+const eurToUsd = 1.1;
+
+// --------------  using callback function  -----------------
+// const movementsUsd = movements.map(function(mov) {
+//     return Math.floor(mov * eurToUsd);
+// })
+
+// ----------------  using arrow function  ------------------
+const movementsUsd = movements.map(mov => Math.floor(mov * eurToUsd));
+console.log(movements);
+console.log(movementsUsd);
+
+const movementsUsdFor = [];
+for(const mov of movements) {
+    movementsUsdFor.push(Math.floor(mov * eurToUsd));
+}
+console.log(movementsUsdFor);
+
+// const movementsDescriptions = movements.map((mov, i , arr) => {
+//     `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdraw'} ${Math.abs(mov)}`; 
+//     if(mov > 0){
+//         return `Movement ${i + 1}: You deposited ${mov}`; 
+//     }
+//     else {
+//         return `Movement ${i + 1}: You withdraw ${Math.abs(mov)}`; 
+//     }
+// });
+
+const movementsDescriptions = movements.map((mov, i , arr) => `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdraw'} ${Math.abs(mov)}`);
+
+console.log(movementsDescriptions);*/
