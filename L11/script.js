@@ -192,3 +192,25 @@ console.log(currenciesUnique);
 currenciesUnique.forEach(function(value, _ , map){
     console.log(`${_} : ${value}`);
 });*/
+
+
+// 145. Coding Challenge #1 
+const checkDog = function(dogsJulia, dogsKate) {
+    const dogsJuliaNew = dogsJulia.slice();
+    dogsJuliaNew.splice(0,-1);
+    dogsJuliaNew.splice(-2);
+    console.log(dogsJuliaNew);
+
+    const dogs = dogsJuliaNew.concat(dogsKate);
+    console.log(dogs);
+
+    dogs.forEach(function(dog, i){
+        if(dog > 3) {
+            console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
+        }
+        else{
+            console.log(`Dog number ${i + 1} is still a puppy 🐶`);
+        }
+    });
+}
+checkDog([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
