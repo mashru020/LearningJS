@@ -38,7 +38,7 @@ const accounts = [account1,account2, account3, account4];
 //Elements
 const labelWelcome = document.querySelector('.welcome');
 const labelData = document.querySelector('.data');
-const labelBalance = document.querySelector('.balance__balue');
+const labelBalance = document.querySelector('.balance__value');
 const labelSumIn = document.querySelector('.summary__value--in');
 const labelSumOut = document.querySelector('.summary__value--out');
 const labelSumInterest = document.querySelector('.summary__value--interest');
@@ -82,6 +82,21 @@ const displayMovements = function(movements) {
 
 displayMovements(account1.movements);
 
+// ------------------- calculate and pring balance -----------------------
+// const calcPrintBalance = function(accs) {
+//     accs.forEach(function(acc){
+//         acc.balance = acc.movements.reduce((accu, mov) => accu + mov),0;
+//     });
+// }
+
+const calcPrintBalance = function(movements) {
+    const balance = movements.reduce((accu, mov) => accu + mov, 0);
+    labelBalance.textContent = `${balance}€`;
+}
+
+calcPrintBalance(account1.movements);
+
+// ---------------------------  Create Username --------------------------
 // 148. Computing Usernames
 const createUserName = function(accs){
     accs.forEach(function(acc){
@@ -93,6 +108,8 @@ const createUserName = function(accs){
     });
 }
 createUserName(accounts);
+
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -262,7 +279,7 @@ const movementsDescriptions = movements.map((mov, i , arr) => `Movement ${i + 1}
 
 console.log(movementsDescriptions);*/
 
-// 149. The filter Method
+/*// 149. The filter Method
 const deposits = movements.filter(function(mov){
    return mov > 0;
 });
@@ -274,4 +291,28 @@ for(const mov of movements ) if(mov > 0) depositFor.push(mov);
 console.log(depositFor);
 
 const withdrawals = movements.filter(mov => mov < 0);
-console.log(withdrawals);
+console.log(withdrawals);*/
+
+// 150. The reduce method
+
+console.log(movements);
+// accumulator -> SNOWBALL 
+//  ------------  using normal function ------------------
+// const balance = movements.reduce(function(accum, cur , i , arr){
+//     console.log(`Iteration ${i}: ${accum}`);
+//     return accum + cur;
+// },0);
+// console.log(balance);
+
+
+// -------------------- using arrow function ------------------
+const balance = movements.reduce((accum, cur) => accum + cur,0);
+console.log(balance);
+
+let balance2 = 0;
+for(const mov of movements) balance2+= mov;
+console.log(balance2);
+
+// Maximum value
+const maxVal = movements.reduce((accu, cur) => cur > accu ? cur : accu , movements[0]);
+console.log(maxVal);
