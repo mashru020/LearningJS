@@ -293,7 +293,7 @@ console.log(depositFor);
 const withdrawals = movements.filter(mov => mov < 0);
 console.log(withdrawals);*/
 
-// 150. The reduce method
+/*// 150. The reduce method
 
 console.log(movements);
 // accumulator -> SNOWBALL 
@@ -315,4 +315,17 @@ console.log(balance2);
 
 // Maximum value
 const maxVal = movements.reduce((accu, cur) => cur > accu ? cur : accu , movements[0]);
-console.log(maxVal);
+console.log(maxVal);*/
+
+// 151. Coding challange #2 
+const calcAverageHumanAge = function(dogs) {
+    const humanAge = dogs.map(dogAge => dogAge<=2 ? 2 * dogAge : 16 + (4 * dogAge));
+    const adultDog = humanAge.filter(age => age >= 18 );
+    const avgHumanAge = adultDog.reduce((accu, age, i , arr) =>accu + age / arr.length,0);
+    
+    console.log(humanAge);
+    console.log(adultDog);
+    console.log(avgHumanAge);
+}
+calcAverageHumanAge([5,2,4,1,15,8,3]);
+calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
