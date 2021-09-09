@@ -353,8 +353,7 @@ calcAverageHumanAge([5,2,4,1,15,8,3]);
 calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);*/
 
 
-//  152. The magic of chining method
-
+/*//  152. The magic of chining method
 const eurToUsd = 1.1; 
 
 // PIPELINE
@@ -367,4 +366,33 @@ const totalDepositsUSD = movements
     // })
     .reduce((accu, mov) => accu + mov , 0);
 
-console.log(totalDepositsUSD);
+console.log(totalDepositsUSD);*/
+
+/*// 153. Coding challange #3
+const calcAverageHumanAge = function(dogs) {
+    const avgHumanAge = dogs.map(dogAge => dogAge<=2 ? 2 * dogAge : 16 + (4 * dogAge)).filter(age => age >= 18 ).reduce((accu, age, i , arr) =>accu + age / arr.length,0);
+    
+}
+const avg1 = calcAverageHumanAge([5,2,4,1,15,8,3]);
+const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+console.log(avg1, avg2);*/
+
+// 154. The find method  -- only return the first element in the array that satisfies the condition
+const firstWithdrawal = movements.find(mov => mov < 0 );
+console.log(movements);
+console.log(firstWithdrawal);
+
+console.log(accounts);
+
+// with find method
+const account = accounts.find(acc => acc.owner === 'Tahmid Khan');
+console.log(account);
+
+
+// with for Of loop
+const findAcc = function(accounts) {
+    for(const acc of accounts){
+        if(acc.owner === 'Mahir Faisal') return acc;
+    }
+}
+console.log(findAcc(accounts));
