@@ -24,7 +24,7 @@ const account3 = {
     owner:"Adib Mahmud",
     movements: [200, -200, 340, -300, -20, 50, 400, -460],
     interestRate: 0.7,
-    pin:333,
+    pin:3333,
 };
 const account4 = {
     owner:"Mahir Faisal",
@@ -80,7 +80,7 @@ const displayMovements = function(movements) {
     });
 }
 
-displayMovements(account1.movements);
+// displayMovements(account1.movements);
 
 // ------------------- calculate and pring balance -----------------------
 // const calcPrintBalance = function(accs) {
@@ -94,29 +94,29 @@ const calcPrintBalance = function(movements) {
     labelBalance.textContent = `${balance}€`;
 }
 
-calcPrintBalance(account1.movements);
+// calcPrintBalance(account1.movements);
 
 // ------------------------ Display summery ----------------------------------
 
-const calcDisplaySummery = function(movements) {
-    const incomes = movements
+const calcDisplaySummery = function(acc) {
+    const incomes = acc.movements
         .filter(mov => mov > 0)
         .reduce((accu, mov) => accu + mov, 0);
     labelSumIn.textContent = `${incomes}€`
 
-    const out = movements
+    const out = acc.movements
         .filter(mov => mov < 0)
         .reduce((accu, mov) => accu + mov , 0);
     labelSumOut.textContent = `${Math.abs(out)}€`;
 
-    const interest = movements
+    const interest = acc.movements
         .filter(mov => mov > 0)
-        .map(deposit => deposit * 1.2 / 100)
+        .map(deposit => deposit * acc.interestRate / 100)
         .filter(int => int > 1)
         .reduce((accu, int) => accu + int);
     labelSumInterest.textContent = `${interest}€`;
 }
-calcDisplaySummery(account1.movements);
+// calcDisplaySummery(account1.movements);
 // ---------------------------  Create Username --------------------------
 // 148. Computing Usernames
 const createUserName = function(accs){
@@ -130,6 +130,31 @@ const createUserName = function(accs){
 }
 createUserName(accounts);
 
+// ------------------------- Event Handler  ------------------------------
+let currentAccount;
+
+btnLogin.addEventListener('click', function(e){
+    //Prevent form from submitting
+    e.preventDefault();
+    currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
+    console.log(currentAccount);
+    if(currentAccount?.pin === Number(inputLoginPin.value)){
+        // Display UI and massage
+        labelWelcome.textContent = `welcome back, ${currentAccount.owner.split(' ')[0]}`;
+        containerApp.style.opacity = 100;
+
+        // clear input field
+        inputLoginUsername.value =  inputLoginPin.value = '';
+        inputLoginPin.blur();
+
+        // dispaly movements 
+        displayMovements(currentAccount.movements);
+        // display balance
+        calcPrintBalance(currentAccount.movements);
+        // dispaly summery
+        calcDisplaySummery(currentAccount);
+    }
+})
 
 
 /////////////////////////////////////////////////
@@ -377,7 +402,7 @@ const avg1 = calcAverageHumanAge([5,2,4,1,15,8,3]);
 const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 console.log(avg1, avg2);*/
 
-// 154. The find method  -- only return the first element in the array that satisfies the condition
+/*// 154. The find method  -- only return the first element in the array that satisfies the condition
 const firstWithdrawal = movements.find(mov => mov < 0 );
 console.log(movements);
 console.log(firstWithdrawal);
@@ -395,4 +420,4 @@ const findAcc = function(accounts) {
         if(acc.owner === 'Mahir Faisal') return acc;
     }
 }
-console.log(findAcc(accounts));
+console.log(findAcc(accounts));*/
