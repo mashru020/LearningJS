@@ -72,7 +72,7 @@ const displayMovements = function(movements) {
         const html =`
             <div class="movements__row">
                 <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
-                <div class="movements__value">${mov}</div>
+                <div class="movements__value">${mov}€</div>
             </div>
         `;
 
@@ -96,6 +96,27 @@ const calcPrintBalance = function(movements) {
 
 calcPrintBalance(account1.movements);
 
+// ------------------------ Display summery ----------------------------------
+
+const calcDisplaySummery = function(movements) {
+    const incomes = movements
+        .filter(mov => mov > 0)
+        .reduce((accu, mov) => accu + mov, 0);
+    labelSumIn.textContent = `${incomes}€`
+
+    const out = movements
+        .filter(mov => mov < 0)
+        .reduce((accu, mov) => accu + mov , 0);
+    labelSumOut.textContent = `${Math.abs(out)}€`;
+
+    const interest = movements
+        .filter(mov => mov > 0)
+        .map(deposit => deposit * 1.2 / 100)
+        .filter(int => int > 1)
+        .reduce((accu, int) => accu + int);
+    labelSumInterest.textContent = `${interest}€`;
+}
+calcDisplaySummery(account1.movements);
 // ---------------------------  Create Username --------------------------
 // 148. Computing Usernames
 const createUserName = function(accs){
@@ -108,6 +129,7 @@ const createUserName = function(accs){
     });
 }
 createUserName(accounts);
+
 
 
 /////////////////////////////////////////////////
@@ -317,7 +339,7 @@ console.log(balance2);
 const maxVal = movements.reduce((accu, cur) => cur > accu ? cur : accu , movements[0]);
 console.log(maxVal);*/
 
-// 151. Coding challange #2 
+/*// 151. Coding challange #2 
 const calcAverageHumanAge = function(dogs) {
     const humanAge = dogs.map(dogAge => dogAge<=2 ? 2 * dogAge : 16 + (4 * dogAge));
     const adultDog = humanAge.filter(age => age >= 18 );
@@ -328,4 +350,21 @@ const calcAverageHumanAge = function(dogs) {
     console.log(avgHumanAge);
 }
 calcAverageHumanAge([5,2,4,1,15,8,3]);
-calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);*/
+
+
+//  152. The magic of chining method
+
+const eurToUsd = 1.1; 
+
+// PIPELINE
+const totalDepositsUSD = movements
+    .filter(mov => mov > 0)
+    .map(mov => mov * eurToUsd)
+    // .map((mov, i, arr) => {
+    //     console.log(arr);
+    //     return mov * eurToUsd;
+    // })
+    .reduce((accu, mov) => accu + mov , 0);
+
+console.log(totalDepositsUSD);
