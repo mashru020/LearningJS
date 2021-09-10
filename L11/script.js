@@ -147,7 +147,6 @@ btnLogin.addEventListener('click', function(e){
     //Prevent form from submitting
     e.preventDefault();
     currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
-    console.log(currentAccount);
     if(currentAccount?.pin === Number(inputLoginPin.value)){
         // Display UI and massage
         labelWelcome.textContent = `welcome back, ${currentAccount.owner.split(' ')[0]}`;
@@ -188,7 +187,28 @@ btnTransfer.addEventListener('click',function(e){
 
 });
 
+btnClose.addEventListener('click', function(e) {
+    e.preventDefault();
+    
 
+    if(
+        inputCloseUsername.value === currentAccount.username && 
+        currentAccount.pin === Number(inputClosePin.value)  
+    )  {
+
+        const index = accounts.findIndex(acc => acc.username === currentAccount.username);
+        console.log(index);
+
+
+        // Delete account
+        accounts.splice(index, 1);
+
+        // hide UI
+        containerApp.style.opacity = 0;
+    }
+    inputClosePin.value = inputCloseUsername.value = '';
+    inputClosePin.blur();
+});
 
 
 /////////////////////////////////////////////////
