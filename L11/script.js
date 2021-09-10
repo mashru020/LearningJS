@@ -187,6 +187,23 @@ btnTransfer.addEventListener('click',function(e){
 
 });
 
+btnLoan.addEventListener('click', function(e) {
+    e.preventDefault();
+    const amount = Number(inputLoanAmount.value);
+    if (
+        amount > 0 && 
+        currentAccount.movements.some( mov => mov >= amount * .1 )){
+
+            // add movement
+            currentAccount.movements.push(amount);
+
+            // update UI
+            updateUI(currentAccount);
+        }
+        inputLoanAmount.value = '';
+        inputLoanAmount.blur();
+});
+
 btnClose.addEventListener('click', function(e) {
     e.preventDefault();
     
@@ -475,3 +492,26 @@ const findAcc = function(accounts) {
     }
 }
 console.log(findAcc(accounts));*/
+
+// 158. Some and Every Method
+console.log(movements);
+
+// check equality
+console.log(movements.includes(-130)); //return true
+
+//SOME: check condition
+
+console.log(movements.some(mov => mov > 1500));
+const anyDeposit = movements.some(mov => mov > 2000)
+console.log(anyDeposit);
+
+// EVERY: if every pass the condition then only return the true
+
+console.log(movements.every(mov => mov > 0));
+console.log(account4.movements.every(mov => mov > 0));
+
+// Separate callback
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
