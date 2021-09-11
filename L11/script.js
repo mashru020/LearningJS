@@ -550,7 +550,7 @@ console.log(overalBalanceNew);
 const overalBalanceFlatMap = accounts.flatMap(acc => acc.movements).reduce((accu, mov) => accu+ mov , 0);
 console.log(overalBalanceFlatMap);*/
 
-// 160. Sorting Arrays
+/*// 160. Sorting Arrays
 
 const owners = ['Mashru', 'Tahmid', 'Adib', 'Mahir'];
 console.log(owners.sort()); //it mutate the array
@@ -577,4 +577,45 @@ console.log(movements);
 //     if(a < b) return 1;
 // });
 movements.sort((a, b) => b - a);
-console.log(movements);
+console.log(movements);*/
+
+// 161. More way to creating and filling Array
+const arr = [1, 2, 3, 4, 5, 6];
+console.log(new Array(1, 2, 3, 4, 5, 6));
+
+
+// emply arr + fill method
+const x = new Array(7);
+console.log(x);
+//console.log(x.map(() => 5));
+
+//x.fill(1);
+//x.fill(1, 3); // 2nd parameter is the starting position
+x.fill(1, 3,5);// 3rd parameter is the end parameter
+console.log(x);
+
+arr.fill(23, 2, 5);
+console.log(arr);
+
+// Array.form
+const Y = Array.from({length: 7}, () => 1);
+console.log(Y);
+
+const z = Array.from({length: 7 }, ( _ , i) => i +1);
+console.log(z);
+
+const arrDiceRolls = Array.from({length: 100}, (_, i)=> Math.floor((Math.random() * 6) + 1));
+console.log(arrDiceRolls);
+
+
+
+labelBalance.addEventListener('click', function() {
+    const movementsUI = Array.from(document.querySelectorAll('.movements__value'),
+     el => Number(el.textContent.replace('€', ''))
+    );
+
+    console.log(movementsUI);
+
+    const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+    console.log(movementsUI2);
+});
