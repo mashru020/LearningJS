@@ -332,7 +332,7 @@ const calcDisplaySummary = function (acc) {
 	console.log((2.2345).toFixed(2));
 	console.log(+(2.2345).toFixed(2));*/
 
-	// 168. The Reminder Operator
+	/*// 168. The Reminder Operator
 	
 	console.log(5 % 2);
 	console.log(5 / 2);
@@ -347,5 +347,35 @@ const calcDisplaySummary = function (acc) {
 			if(i % 2 === 0 ) row.style.backgroundColor = 'orangered';
 			if(i % 2 === 1) row.style.backgroundColor = 'blue';
 		});
-	});
-	
+	});*/
+
+	// 169. Working with BigInt
+	console.log(2 ** 53 - 1);
+	console.log(Number.MAX_SAFE_INTEGER)
+
+	console.log(2 ** 53 + 1);
+	console.log(2 ** 53 + 2);
+	console.log(2 ** 53 + 3);
+	console.log(2 ** 53 + 4);
+
+	console.log(23940578193057840893457n); // n convert regular numver to big number
+	console.log(BigInt(123456789));
+
+	// operation
+	console.log(10000n + 10000n);
+	console.log(123456789n * 10000n);
+	const huge = 123456789n;
+	const num =23;
+	console.log(huge * BigInt(num));
+
+	console.log( 20n > 10);
+	console.log(20n === 20);
+	console.log(typeof 20n);
+	console.log(20n == '20');
+
+	console.log(huge + ' is really big!!!');
+
+	console.log(10n / 3n);
+	console.log(10/3);
+
+	//console.log(Math.sqrt(16n));
