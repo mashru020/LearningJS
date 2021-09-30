@@ -349,7 +349,7 @@ const calcDisplaySummary = function (acc) {
 		});
 	});*/
 
-	// 169. Working with BigInt
+	/*// 169. Working with BigInt
 	console.log(2 ** 53 - 1);
 	console.log(Number.MAX_SAFE_INTEGER)
 
@@ -378,4 +378,40 @@ const calcDisplaySummary = function (acc) {
 	console.log(10n / 3n);
 	console.log(10/3);
 
-	//console.log(Math.sqrt(16n));
+	//console.log(Math.sqrt(16n));*/
+
+	// 170. Creating Dates
+	/*
+	const now = new Date();
+	console.log(now);
+
+	console.log(new Date('Aug 02 2021 18:05:34'));
+	console.log(new Date('2021 12 31'));
+
+	console.log(new Date('11, 17, 2020'));
+	console.log(new Date(account1.movementsDates[0]));
+
+	console.log(new Date(2021, 10, 19, 15,23,5));
+
+	console.log(new Date(0));
+	console.log(new Date(3 * 24* 60 * 60 * 1000));
+	
+	// working with dates
+	const future = new Date(2021, 10, 19, 15,23);
+	console.log(future);
+
+	console.log(future.getFullYear());
+	console.log(future.getMonth());
+	console.log(future.getDate());
+	console.log(future.getDay());
+	console.log(future.getHours());
+	console.log(future.getMinutes());
+	console.log(future.getSeconds());
+	console.log(future.toISOString());
+	console.log(future.getTime());
+
+	console.log(new Date(1637313780000));
+	console.log(Date.now());
+
+	future.setFullYear(2040);
+	console.log(future);*/
