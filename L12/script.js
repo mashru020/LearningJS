@@ -82,7 +82,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
 // Functions
-const formatMovementDate = function(date){
+const formatMovementDate = function(date, locale){
 	const calcDaysPassed = (date1, date2) => Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 
 	const daysPassed = calcDaysPassed(date,new Date())
@@ -90,12 +90,13 @@ const formatMovementDate = function(date){
 	if(daysPassed === 0)return 'Today';
 	if(daysPassed === 1) return 'Yesterday';
 	if(daysPassed <= 7) return `${daysPassed} days ago`;
-	else {
-		const day = `${date.getDate()}`.padStart(2, 0);
-		const month = `${date.getMonth() + 1}`.padStart(2, 0);
-		const year = date.getFullYear();
-		return `${day}/${month}/${year}`;
-	}	
+	// else {
+	// 	const day = `${date.getDate()}`.padStart(2, 0);
+	// 	const month = `${date.getMonth() + 1}`.padStart(2, 0);
+	// 	const year = date.getFullYear();
+	// 	return `${day}/${month}/${year}`;
+	// }	
+	return new Intl.DateTimeFormat(locale).format(date);
 }
 const displayMovements = function (acc, sort = false) {
 	containerMovements.innerHTML = '';
@@ -106,7 +107,7 @@ const displayMovements = function (acc, sort = false) {
 
 		const type = mov > 0 ? 'deposit' : 'withdrawal';
 		const date = new Date(acc.movementsDates[i]);
-		const displayDate = formatMovementDate(date);
+		const displayDate = formatMovementDate(date, acc.locale);
 		
 
 		
@@ -181,7 +182,28 @@ const calcDisplaySummary = function (acc) {
 	updateUI(currentAccount);
 	containerApp.style.opacity = 100;
 
-	
+	/*// Experiment API
+	const now = new Date();
+	const options = {
+		hour: 'numeric',
+		minute: 'numeric',
+		day: 'numeric',
+		month:'long',
+		// month: '2-digit',
+		// month: 'numeric',
+		year: 'numeric',
+		weekday: 'short',
+
+	}
+
+	const local = navigator.language;
+	console.log(local);
+
+
+	labelDate.textContent = new Intl.DateTimeFormat(local, options).format(now);
+	//labelDate.textContent = new Intl.DateTimeFormat('en-GB').format(now);
+	//labelDate.textContent = new Intl.DateTimeFormat('ar-SY').format(now);
+	//labelDate.textContent = new Intl.DateTimeFormat('pt-PT', options).format(now);*/
 
 	btnLogin.addEventListener('click', function (e) {
 		// Prevent form from submitting
@@ -203,15 +225,31 @@ const calcDisplaySummary = function (acc) {
 			// create current date
 			const now = new Date();
 	
-			const day = `${now.getDate()}`.padStart(2, 0);
-			const month = `${now.getMonth() + 1}`.padStart(2, 0);
-			const year = now.getFullYear();
-			const hour = `${now.getHours()}`.padStart(2, 0);
-			const min =`${now.getMinutes()}`.padStart(2, 0);
+			// const day = `${now.getDate()}`.padStart(2, 0);
+			// const month = `${now.getMonth() + 1}`.padStart(2, 0);
+			// const year = now.getFullYear();
+			// const hour = `${now.getHours()}`.padStart(2, 0);
+			// const min =`${now.getMinutes()}`.padStart(2, 0);
 
 
-			labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+			// labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
 			// day/month/year
+
+			// Internationalization Date
+			const options = {
+				hour: 'numeric',
+				minute: 'numeric',
+				day: 'numeric',
+				//month:'long',
+				// month: '2-digit',
+			 	month: 'numeric',
+				year: 'numeric',
+				// weekday: 'short',
+
+			}
+			// const locale = navigator.language;
+			// console.log(locale);
+			labelDate.textContent = new Intl.DateTimeFormat(currentAccount.locale, options).format(now);
 	
 			// Clear input fields
 			inputLoginUsername.value = inputLoginPin.value = '';
@@ -465,7 +503,7 @@ const calcDisplaySummary = function (acc) {
 
 	// 171. Adding Dates to the Bankist App
 
-	// 172. Operations With Dates
+	/*// 172. Operations With Dates
 
 	const future = new Date(2021, 10, 19, 15,23);
 	//console.log(Number(future));
@@ -476,6 +514,9 @@ const calcDisplaySummary = function (acc) {
 		new Date(2021, 3, 24), 
 		new Date(2021, 3, 19)
 	);
-	console.log(days1);
+	console.log(days1);*/
+
+	// 173. Internationalization Dates (Intl)
+	
 
 
