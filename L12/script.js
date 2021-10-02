@@ -109,7 +109,7 @@ const formatCur = function(value, locale, currency) {
 
 const displayMovements = function (acc, sort = false) {
 	containerMovements.innerHTML = '';
-
+	
 	const movs = sort ? acc.movements.slice().sort((a, b) => a - b) : acc.movements;
 
 	movs.forEach(function (mov, i) {
@@ -178,14 +178,41 @@ const calcDisplaySummary = function (acc) {
 		calcDisplaySummary(acc);
 	};
 	
+	const startLogOutTimer = function() {
+		
+		const tick = function() {
+			const min = String(Math.trunc(time / 60)).padStart(2,0);
+			const sec = String(time % 60).padStart(2,0);
+			// In each call, print the remaining time to UI
+			labelTimer.textContent = `${min}:${sec}`;
+				
+			// When 0 seconds, stop timer and Log out user
+			if(time === 0 ) {
+				clearInterval(timer);
+				labelWelcome.textContent = `Log in to get started`;
+				
+				containerApp.style.opacity = 0;
+			}
+			// Decrese 1s
+			time--;
+		}
+
+		// Set time to 5 minutes
+		let time = 120;
+
+		// call timer every second
+		tick();
+		const timer = setInterval (tick ,1000);
+		return timer;
+	};
 	///////////////////////////////////////
 	// Event handlers
-	let currentAccount;
+	let currentAccount, timer;
 	
 	// FAKE ALWAYS LOGGED In 
-	currentAccount = account1;
-	updateUI(currentAccount);
-	containerApp.style.opacity = 100;
+	// currentAccount = account1;
+	// updateUI(currentAccount);
+	// containerApp.style.opacity = 100;
 
 	/*// Experiment API
 	const now = new Date();
@@ -259,6 +286,10 @@ const calcDisplaySummary = function (acc) {
 			// Clear input fields
 			inputLoginUsername.value = inputLoginPin.value = '';
 			inputLoginPin.blur();
+
+			if(timer) clearInterval(timer);
+			timer = startLogOutTimer();
+			
 	
 			// Update UI
 			updateUI(currentAccount);
@@ -289,6 +320,10 @@ const calcDisplaySummary = function (acc) {
 	
 			// Update UI
 			updateUI(currentAccount);
+
+			// Reset the timer
+			clearInterval(timer);
+			timer = startLogOutTimer();
 		}
 	});
 	
@@ -309,9 +344,12 @@ const calcDisplaySummary = function (acc) {
 		
 				// Update UI
 				updateUI(currentAccount);
+				clearInterval(timer);
+				timer = startLogOutTimer();
 			},2500);
 	}
 		inputLoanAmount.value = '';
+		
 	});
 	
 	btnClose.addEventListener('click', function (e) {
@@ -563,7 +601,7 @@ const calcDisplaySummary = function (acc) {
 	console.log('Serya   : ', new Intl.NumberFormat('ar-SY', options3).format(num));
 	console.log(navigator.language, 'Browser : ', new Intl.NumberFormat(navigator.language, options3).format(num));*/
 
-	// 175. Timers -> setTimeout and setInterval
+	/*// 175. Timers -> setTimeout and setInterval
 	
 	// setTimeout
 	//setTimeout((ing1, ing2) => console.log(`Here is your Pizza with ${ing1} and ${ing2} 🍕`),3000, 'olives', 'spinach');
@@ -577,4 +615,7 @@ const calcDisplaySummary = function (acc) {
 	setInterval(function() {
 		const now = new Date();
 		console.log(now);
-	},1000)
+	},1000);*/
+
+	// 176. Implementing Countdown Timer
+
