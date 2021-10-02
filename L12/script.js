@@ -298,15 +298,19 @@ const calcDisplaySummary = function (acc) {
 		const amount = Math.floor(inputLoanAmount.value);
 	
 		if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-			// Add movement
-			currentAccount.movements.push(amount);
+			// setTimeout Function
+			setTimeout( function() {
 
-			// Transfer Date
-			currentAccount.movementsDates.push(new Date().toISOString());
-	
-			// Update UI
-			updateUI(currentAccount);
-		}
+				// Add movement
+				currentAccount.movements.push(amount);
+
+				// Transfer Date
+				currentAccount.movementsDates.push(new Date().toISOString());
+		
+				// Update UI
+				updateUI(currentAccount);
+			},2500);
+	}
 		inputLoanAmount.value = '';
 	});
 	
@@ -522,7 +526,7 @@ const calcDisplaySummary = function (acc) {
 	console.log(days1);*/
 
 	// 173. Internationalization Dates (Intl)
-	// 174. Internationalization Numbers 
+	/*// 174. Internationalization Numbers 
 	const num = 2884764.23;
 
 	const options1 = {
@@ -557,4 +561,20 @@ const calcDisplaySummary = function (acc) {
 	console.log('==================== percent ========================');
 	console.log('Germany : ', new Intl.NumberFormat('de-DE', options3).format(num));
 	console.log('Serya   : ', new Intl.NumberFormat('ar-SY', options3).format(num));
-	console.log(navigator.language, 'Browser : ', new Intl.NumberFormat(navigator.language, options3).format(num));
+	console.log(navigator.language, 'Browser : ', new Intl.NumberFormat(navigator.language, options3).format(num));*/
+
+	// 175. Timers -> setTimeout and setInterval
+	
+	// setTimeout
+	//setTimeout((ing1, ing2) => console.log(`Here is your Pizza with ${ing1} and ${ing2} 🍕`),3000, 'olives', 'spinach');
+	const ingredients = ['olives', 'spinach'];
+	const pizzaTimer = setTimeout((ing1, ing2) => console.log(`Here is your Pizza with ${ing1} and ${ing2} 🍕`),2000, ...ingredients);
+	console.log('Waiting...');
+
+	if(ingredients.includes('spinach')) clearTimeout(pizzaTimer);
+
+	// setInterval
+	setInterval(function() {
+		const now = new Date();
+		console.log(now);
+	},1000)
