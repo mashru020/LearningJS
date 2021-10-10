@@ -45,7 +45,7 @@ document.getElementById('#section--1');
 const allButtons = document.getElementsByTagName('button');
 console.log(allButtons);
 
-console.log(document.getElementsByClassName('btn'));*/
+console.log(document.getElementsByClassName('btn'));
 
 // Creating and inserting elements 
 //.insetAdjacentHTML
@@ -122,4 +122,33 @@ logo.classList.toggle('c');
 logo.classList.contains('c'); //not includes
 
 // don't use
-logo.className = 'mashru';
+logo.className = 'mashru';*/ 
+
+// 183. Implementing Smooth Scrooling
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function(e) {
+    /*const s1coords = section1.getBoundingClientRect();
+    //console.log(s1coords);
+
+    //console.log(e.target.getBoundingClientRect());
+
+    //console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+
+    //console.log('height/width viewport', document.documentElement.clientHeight, document.documentElement.clientWidth);
+
+    // Scrolling
+    //window.scrollTo(s1coords.left + window.pageXOffset, s1coords.top + window.pageYOffset);
+
+    // =================  old school style  ==============
+    window.scrollTo ({
+        left: s1coords.left + window.pageXOffset, 
+        top: s1coords.top + window.pageYOffset, 
+        behavior: 'smooth',
+    });*/
+
+    // ================  modern style ================ (support in only moddrn browser) 
+    section1.scrollIntoView({behavior: 'smooth'});
+
+})
