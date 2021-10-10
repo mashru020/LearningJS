@@ -27,7 +27,8 @@ document.addEventListener('keydown', function(e) {
     if(e.key === 'Escap' && !modal.classList.contains('hidden')) {
         closeModal();
     }
-})
+});
+
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -151,4 +152,27 @@ btnScrollTo.addEventListener('click', function(e) {
     // ================  modern style ================ (support in only moddrn browser) 
     section1.scrollIntoView({behavior: 'smooth'});
 
-})
+});
+
+// 184. Types of Events and Event Handlers
+
+const h1 = document.querySelector('h1');
+
+const alertH1 = function(e) {
+    alert('addEventListener: Great! You are reading the hading 😁');
+
+    // way 3
+    h1.removeEventListener('mouseenter', alertH1);
+}
+// way 1
+h1.addEventListener('mouseenter', alertH1 );
+
+// way 2
+// h1.onmouseenter = function(e) {
+//     alert('addEventListener: Great! You are reading the hading 😁😁');
+// };
+
+// way 4
+//setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+
+// way 5 in html
