@@ -29,6 +29,39 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
+// ///////////////////////////////////////
+// Scrolling
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+btnScrollTo.addEventListener('click', function() {
+    section1.scrollIntoView({behavior: 'smooth'})
+});
+
+///////////////////////////////////////////
+// Page Navigation 
+// not a clean solution -> have to use event delegation
+// document.querySelectorAll('.nav__link').forEach( function(el) {
+//     el.addEventListener('click', function(e) {
+//         e.preventDefault();
+//         const id = this.getAttribute('href');
+//         document.querySelector(id).scrollIntoView({behavior: 'smooth'});
+//     });
+// });
+
+// Event Delegation
+// 1. Add event listener to common parent element
+// 2. Determine what element originated the event
+
+document.querySelector('.nav__links').addEventListener('click', function(e) {
+    console.log(e.target);
+
+    // Matching strategy
+    if(e.target.classList.contains('nav__link')) {
+        e.preventDefault();
+        const id = e.target.getAttribute('href');
+        document.querySelector(id).scrollIntoView({behavior: 'smooth'});
+    }
+});
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -126,11 +159,11 @@ logo.classList.contains('c'); //not includes
 logo.className = 'mashru';*/ 
 
 // 183. Implementing Smooth Scrooling
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
+//const btnScrollTo = document.querySelector('.btn--scroll-to');
+/*const section1 = document.querySelector('#section--1');
 
 btnScrollTo.addEventListener('click', function(e) {
-    /*const s1coords = section1.getBoundingClientRect();
+    const s1coords = section1.getBoundingClientRect();
     //console.log(s1coords);
 
     //console.log(e.target.getBoundingClientRect());
@@ -143,18 +176,18 @@ btnScrollTo.addEventListener('click', function(e) {
     //window.scrollTo(s1coords.left + window.pageXOffset, s1coords.top + window.pageYOffset);
 
     // =================  old school style  ==============
-    window.scrollTo ({
-        left: s1coords.left + window.pageXOffset, 
-        top: s1coords.top + window.pageYOffset, 
-        behavior: 'smooth',
-    });*/
+    // window.scrollTo ({
+    //     left: s1coords.left + window.pageXOffset, 
+    //     top: s1coords.top + window.pageYOffset, 
+    //     behavior: 'smooth',
+    // });
 
     // ================  modern style ================ (support in only moddrn browser) 
     section1.scrollIntoView({behavior: 'smooth'});
 
-});
+});*/
 
-// 184. Types of Events and Event Handlers
+/*// 184. Types of Events and Event Handlers
 
 const h1 = document.querySelector('h1');
 
@@ -175,10 +208,10 @@ h1.addEventListener('mouseenter', alertH1 );
 // way 4
 //setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 
-// way 5 in html
+// way 5 in html*/
 
 // 185. Event Propagation, Bubblinga and capturing
-// 186. Event Propagation Practice
+/*// 186. Event Propagation Practice
 // rgb(255,255,255)
 const randomInt = (min, max) =>  Math.floor(Math.random() * ( max - min + 1 ) + min );
 const randomColor = () => `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)},${randomInt(0, 255)})`;
@@ -203,4 +236,7 @@ document.querySelector('.nav').addEventListener(
         console.log('NAV', e.target, e.currentTarget);
     },
     true
-);
+);*/
+
+// 187. Event Delegation Implementing Page Navigation
+// ---------------------- to the top ----------------------
