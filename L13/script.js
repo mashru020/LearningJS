@@ -53,7 +53,7 @@ btnScrollTo.addEventListener('click', function() {
 // 2. Determine what element originated the event
 
 document.querySelector('.nav__links').addEventListener('click', function(e) {
-    console.log(e.target);
+    // console.log(e.target);
 
     // Matching strategy
     if(e.target.classList.contains('nav__link')) {
@@ -61,6 +61,31 @@ document.querySelector('.nav__links').addEventListener('click', function(e) {
         const id = e.target.getAttribute('href');
         document.querySelector(id).scrollIntoView({behavior: 'smooth'});
     }
+});
+
+// Tabbed Component 
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+//tabs.forEach( t => t.addEventListener('click', () => console.log('TAB')));
+
+tabsContainer.addEventListener('click',function(e) {
+    const clicked = e.target.closest('.operations__tab');
+    // console.log(clicked);
+
+    // Guard Clause
+    if(!clicked) return;
+
+    // remove active classes
+    tabs.forEach( t => t.classList.remove('operations__tab--active'));
+    tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+    // Active Tab
+    clicked.classList.add('operations__tab--active');
+
+    // Active content area
+    document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
 });
 
 //////////////////////////////////////////////////////////////////////////
@@ -239,9 +264,9 @@ document.querySelector('.nav').addEventListener(
 );*/
 
 // 187. Event Delegation Implementing Page Navigation
-// ---------------------- to the top ----------------------
+// ---------------------- in the top ----------------------
 
-// 188. Dom Traversing
+/*// 188. Dom Traversing
 
 const h1 = document.querySelector('h1');
 
@@ -272,4 +297,7 @@ console.log(h1.parentElement.children);
     if(el !== h1) {
         el.style.transform = 'scale(0.5)';
     }
-});
+});*/
+
+// 189.Building Tabbed component
+// ---------------------- in the top ----------------------
