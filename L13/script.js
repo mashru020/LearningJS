@@ -172,6 +172,27 @@ const headerObserver = new IntersectionObserver(stickyNav, {
     rootMargin: `-${navHeight}px`,
 });
 headerObserver.observe(header);
+
+///////////////////////////////////////////
+//Reveal sections
+const allSections = document.querySelectorAll('.section');
+const revealSection = function(entries, observer){
+    const [entry] = entries;
+    console.log(entry);
+    if(!entry.isIntersecting) return;
+    entry.target.classList.remove('section--hidden');
+    observer.unobserve(entry.target);
+};
+const sectionObserver = new IntersectionObserver(revealSection, {
+    root: null,
+    threshold: 0.15,
+});
+allSections.forEach(function(section){
+    sectionObserver.observe(section);
+    section.classList.add('section--hidden');
+});
+
+
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
@@ -386,5 +407,6 @@ console.log(h1.parentElement.children);
 // 189.Building Tabbed component
 // 190. Passing argument to event handler
 // 191. Implementing a Sticky navigation the scroll event
-// 192. A Better Way The Intersection Observer API
+// 192. A Better Way The Intersection Observer API\
+// 193. REveailing Elements on scroll
 // ---------------------- in the app section ----------------------
