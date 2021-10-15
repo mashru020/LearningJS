@@ -1,12 +1,26 @@
 'use scrict'
 
 ////////////////////////////////////////////
-// Modal window
+// Modal
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 
+// nav
+const nav = document.querySelector('.nav');
+
+// scroll
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+// Tabbed Component 
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+
+// modal window
 const openModal = function(e) {
     e.preventDefault();
     modal.classList.remove('hidden');
@@ -31,8 +45,7 @@ document.addEventListener('keydown', function(e) {
 
 // ///////////////////////////////////////
 // Scrolling
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
+
 btnScrollTo.addEventListener('click', function() {
     section1.scrollIntoView({behavior: 'smooth'})
 });
@@ -63,10 +76,7 @@ document.querySelector('.nav__links').addEventListener('click', function(e) {
     }
 });
 
-// Tabbed Component 
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
+// Tabbed operation
 
 //tabs.forEach( t => t.addEventListener('click', () => console.log('TAB')));
 
@@ -87,6 +97,27 @@ tabsContainer.addEventListener('click',function(e) {
     // Active content area
     document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
 });
+
+// Menu fade animation
+
+const handelHover = function(e) {
+    if(e.target.classList.contains('nav__link')) {
+        const link = e.target;
+        const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+        const logo = link.closest('.nav').querySelector('img');
+        siblings.forEach(el => {
+            if(el !== link) el.style.opacity = this;
+        })
+        logo.style.opacity = this;
+    }
+}
+// nav.addEventListener('mouseover', e => handelHover(e,0.5));
+// nav.addEventListener('mouseout', e => handelHover(e,1));
+
+// passing "agrument" into handler
+nav.addEventListener('mouseover', handelHover.bind(0.5));
+nav.addEventListener('mouseout', handelHover.bind(1));
+
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -300,4 +331,6 @@ console.log(h1.parentElement.children);
 });*/
 
 // 189.Building Tabbed component
+// ---------------------- in the top ----------------------
+// 190. Passing argument to event handler
 // ---------------------- in the top ----------------------
