@@ -61,6 +61,7 @@ btnScrollTo.addEventListener('click', function() {
 //     });
 // });
 
+
 // Event Delegation
 // 1. Add event listener to common parent element
 // 2. Determine what element originated the event
@@ -76,6 +77,8 @@ document.querySelector('.nav__links').addEventListener('click', function(e) {
     }
 });
 
+
+///////////////////////////////////////////
 // Tabbed operation
 
 //tabs.forEach( t => t.addEventListener('click', () => console.log('TAB')));
@@ -98,6 +101,8 @@ tabsContainer.addEventListener('click',function(e) {
     document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
 });
 
+
+///////////////////////////////////////////
 // Menu fade animation
 
 const handelHover = function(e) {
@@ -118,6 +123,18 @@ const handelHover = function(e) {
 nav.addEventListener('mouseover', handelHover.bind(0.5));
 nav.addEventListener('mouseout', handelHover.bind(1));
 
+
+///////////////////////////////////////////
+// Sticky navigation
+
+const initialCoords = section1.getBoundingClientRect();
+console.log(initialCoords);
+window.addEventListener('scroll',function() {
+    console.log(window.scrollY);
+    if(window.scrollY > initialCoords.top) nav.classList.add('sticky');
+    else nav.classList.remove('sticky');
+
+});
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
