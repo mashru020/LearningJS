@@ -122,7 +122,6 @@
     width: 100%;
     padding: 0 6rem;
     z-index: 100;
-    transition: all .2s ease;
   }
   
   /* nav and stickly class at the same time */
