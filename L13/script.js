@@ -178,7 +178,7 @@ headerObserver.observe(header);
 const allSections = document.querySelectorAll('.section');
 const revealSection = function(entries, observer){
     const [entry] = entries;
-    console.log(entry);
+    //console.log(entry);
     if(!entry.isIntersecting) return;
     entry.target.classList.remove('section--hidden');
     observer.unobserve(entry.target);
@@ -192,6 +192,33 @@ allSections.forEach(function(section){
     section.classList.add('section--hidden');
 });
 
+///////////////////////////////////////////
+// Lazy loading images
+
+const imgTarget = document.querySelectorAll('img[data-src]');
+//console.log(imgTarget);
+
+const loadImg = function(entries, observer) {
+    const [entry] = entries;
+    console.log(entry);
+
+    if(!entry.isIntersecting) return;
+    // Replace src with data-src
+    entry.target.src = entry.target.dataset.src;
+    // entry.target.classList.remove('lazy-img');
+    entry.target.addEventListener('load', function() {
+        entry.target.classList.remove('lazy-img');
+    });
+    observer.unobserve(entry.target);
+
+}
+const imgObserver = new IntersectionObserver(loadImg, {
+    root: null,
+    threshold: 0,
+    rootMargin:'-200px'
+});
+
+imgTarget.forEach(img => imgObserver.observe(img));
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -409,4 +436,5 @@ console.log(h1.parentElement.children);
 // 191. Implementing a Sticky navigation the scroll event
 // 192. A Better Way The Intersection Observer API\
 // 193. REveailing Elements on scroll
+// 194. Lazy Loading Image
 // ---------------------- in the app section ----------------------
