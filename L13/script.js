@@ -521,3 +521,18 @@ console.log(h1.parentElement.children);
 // 195. Building a slider component -I
 // 196. Building a slider component -II
 // ---------------------- in the app section ----------------------
+
+// 197. Lifecycle DOM Events
+document.addEventListener('DOMContentLoaded', function(e) {
+    console.log('HTML parsed  and DOM tree built!', e);
+});
+
+window.addEventListener('load', function(e) {
+    console.log('Page fully loaded', e);
+});
+
+// window.addEventListener('beforeunload', function(e) {
+//     e.preventDefault();
+//     console.log(e);
+//     e.returnValue = '';
+// })
