@@ -8,7 +8,8 @@ const Person = function (firstName, birthYear) {
     this.firstName = firstName;
     this.birthYear = birthYear;
 
-// Never Do This
+// Never Do This "if we create 100 person object -> all object will carry this function"
+// solution -> Prototypal Inheritance
     // this.calcAge = function() {
     //     console.log(2021 - birthYear);
     // };
