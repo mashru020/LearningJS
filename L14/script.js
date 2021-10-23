@@ -31,3 +31,29 @@ const jack = 'Jack';
 
 console.log(mashru instanceof Person);
 console.log(jack instanceof Person);
+
+// 204. Prototypes
+// every function in js automatically have prototype property including constructor function.
+console.log(Person.prototype);
+
+Person.prototype.clacAge = function() {
+    console.log(2021 - this.birthYear);
+};
+
+mashru.clacAge();
+adib.clacAge();
+// jack.clacAge(); // error
+
+console.log(mashru.__proto__); // prototype of mashru object 
+console.log(mashru.__proto__ === Person.prototype);
+console.log(Person.prototype.isPrototypeOf(mashru));
+
+
+Person.prototype.species = 'Homo Sapiens'; // inherited property
+
+console.log(mashru.species, adib.species);
+
+console.log(mashru.hasOwnProperty('firstName'));
+console.log(mashru.hasOwnProperty('species'));
+
+
