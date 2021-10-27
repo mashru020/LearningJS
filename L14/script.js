@@ -29,12 +29,12 @@ console.log(tahmid, adib);
 
 const jack = 'Jack';
 
-console.log(mashru instanceof Person);
-console.log(jack instanceof Person);
+// console.log(mashru instanceof Person);
+// console.log(jack instanceof Person);
 
 // 204. Prototypes
 // every function in js automatically have prototype property including constructor function.
-console.log(Person.prototype);
+// console.log(Person.prototype);
 
 Person.prototype.clacAge = function() {
     console.log(2021 - this.birthYear);
@@ -44,16 +44,38 @@ mashru.clacAge();
 adib.clacAge();
 // jack.clacAge(); // error
 
-console.log(mashru.__proto__); // prototype of mashru object 
-console.log(mashru.__proto__ === Person.prototype);
-console.log(Person.prototype.isPrototypeOf(mashru));
+// console.log(mashru.__proto__); // prototype of mashru object 
+// console.log(mashru.__proto__ === Person.prototype);
+// console.log(Person.prototype.isPrototypeOf(mashru));
 
 
 Person.prototype.species = 'Homo Sapiens'; // inherited property
 
-console.log(mashru.species, adib.species);
+// console.log(mashru.species, adib.species);
 
-console.log(mashru.hasOwnProperty('firstName'));
-console.log(mashru.hasOwnProperty('species'));
+// console.log(mashru.hasOwnProperty('firstName'));
+// console.log(mashru.hasOwnProperty('species'));
 
 
+// 206. Prototypal inheritance and Builtin Objects
+
+console.log(mashru.__proto__);
+// Object.prototype (top of the prototype chain)
+console.log(mashru.__proto__.__proto__);
+console.log(mashru.__proto__.__proto__.__proto__);
+
+console.dir(Person.prototype.constructor);
+
+const arr = [1, 3, 3, 6, 4, 6]; //new Array === []
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype);
+
+console.log(arr.__proto__.__proto__);
+
+Array.prototype.unique = function() {
+    return [...new Set(this)];
+};
+
+console.log(arr.unique());
+
+const h1 = document.querySelector('h1');
