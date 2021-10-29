@@ -1,6 +1,6 @@
 'use strict'
 
-// 203. Constructor Functions and the new Operator
+/*// 203. Constructor Functions and the new Operator
 
 // Constructor function always start with capital letter, dont work the arrow function
 const Person = function (firstName, birthYear) {
@@ -78,4 +78,29 @@ Array.prototype.unique = function() {
 
 console.log(arr.unique());
 
-const h1 = document.querySelector('h1');
+const h1 = document.querySelector('h1');*/
+
+// 207. Coding challenge #1
+const Car = function(make, speed) {
+    this.make = make;
+    this.speed = speed;
+}
+
+Car.prototype.accelerate = function() {
+    this.speed += 10 ;
+    console.log(`'${this.make}' going at ${this.speed} km/h`);
+};
+Car.prototype.break = function() {
+    this.speed -= 5;
+    console.log(`'${this.make}' going at ${this.speed} km/h`);
+};
+
+
+const bmw = new Car('BMW' , 120 );
+const mercedes = new Car('Mercedes', 95);
+
+bmw.accelerate();
+mercedes.break();
+bmw.break();
+mercedes.accelerate();
+bmw.break();
