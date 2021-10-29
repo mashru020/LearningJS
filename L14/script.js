@@ -80,7 +80,7 @@ console.log(arr.unique());
 
 const h1 = document.querySelector('h1');*/
 
-// 207. Coding challenge #1
+/*// 207. Coding challenge #1
 const Car = function(make, speed) {
     this.make = make;
     this.speed = speed;
@@ -103,4 +103,43 @@ bmw.accelerate();
 mercedes.break();
 bmw.break();
 mercedes.accelerate();
-bmw.break();
+bmw.break();*/
+
+
+// 208. ES6 Classes
+
+// class expression
+// const PersonCl = class{}
+
+// class declaration
+
+class PersonCl {
+    constructor(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    }
+
+    // Methods will be aded to .prototype property
+    calcAge() {
+        console.log(2021 - this.birthYear )
+    }
+    greet() {
+        console.log(`Hey ${this.firstName}!`);
+    }
+}
+
+const jessica = new PersonCl('Jessica', 1996);
+console.log(jessica);
+
+jessica.calcAge();
+
+console.log(jessica.__proto__ === PersonCl.prototype);
+// PersonCl.prototype.greet = function () {
+//     console.log(`Hey ${this.firstName}!`);
+// }
+
+jessica.greet();
+
+// 1. Classes are NOT hoisted (we can not use classes before declaration)
+// 2. Classes are first-class citizen
+// 3. Classes are executed in strict mode
