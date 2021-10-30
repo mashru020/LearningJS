@@ -109,7 +109,7 @@ mercedes.accelerate();
 bmw.break();*/
 
 
-// 208. ES6 Classes
+/*// 208. ES6 Classes
 
 // class expression
 // const PersonCl = class{}
@@ -171,7 +171,9 @@ jessica.greet();
 // const walter = new PersonCl('Walter', 1989);
 const walter = new PersonCl('Walter White', 1989);
 
-PersonCl.hey();
+PersonCl.hey();*/
+
+
 /*// 209. Setters and Getters
 
 const account = {
@@ -194,3 +196,28 @@ console.log(account.movements);*/
 
 // 210. Static Methods
 // ----------- in the top --------------
+
+
+// 211. Object.create
+const PersonProto = {
+    ccalcAge() {
+        console.log(2021 - this.birthYear);
+    },
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    }, 
+};
+
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.name =  'Steven';
+steven.birthYear = 2002;
+steven.ccalcAge();
+
+console.log(steven.__proto__ === PersonProto);
+const sarah = Object.create(PersonProto);
+sarah.init('Sarah', 1979);
+sarah.ccalcAge();
+
+
