@@ -14,7 +14,10 @@ const Person = function (firstName, birthYear) {
     //     console.log(2021 - birthYear);
     // };
 }
-
+Person.hey = function() {
+    console.log('Hey there 👋');
+}
+Person.hey();
 const mashru = new Person('Mashru', 1994);
 console.log(mashru);
 
@@ -119,6 +122,7 @@ class PersonCl {
         this.birthYear = birthYear;
     }
 
+    // Instance method
     // Methods will be aded to .prototype property
     calcAge() {
         console.log(2021 - this.birthYear )
@@ -126,11 +130,9 @@ class PersonCl {
     greet() {
         console.log(`Hey ${this.firstName}!`);
     }
-
     get age() {
         return 2021 - this.birthYear;
     }
-
     // Set a property that already exists
     set fullName(name) {
         console.log(name);
@@ -140,16 +142,19 @@ class PersonCl {
     get fullName() {
         return this._fullName;
     }
+
+    // Static method
+    static hey() {
+        console.log('Hey there 👋');
+        console.log(this);
+    }
 }
 
 const jessica = new PersonCl('Jessica Davis', 1996);
-console.log(jessica);
-
+console.log(jessica)
 jessica.calcAge();
-
 // using gatters
 console.log(jessica.age);
-
 console.log(jessica.__proto__ === PersonCl.prototype);
 // PersonCl.prototype.greet = function () {
 //     console.log(`Hey ${this.firstName}!`);
@@ -158,13 +163,16 @@ console.log(jessica.__proto__ === PersonCl.prototype);
 jessica.greet();
 
 
-// const walter = new PersonCl('Walter', 1989);
-const walter = new PersonCl('Walter White', 1989);
+
 // 1. Classes are NOT hoisted (we can not use classes before declaration)
 // 2. Classes are first-class citizen
 // 3. Classes are executed in strict mode
 
-// 209. Setters and Getters
+// const walter = new PersonCl('Walter', 1989);
+const walter = new PersonCl('Walter White', 1989);
+
+PersonCl.hey();
+/*// 209. Setters and Getters
 
 const account = {
     owner: 'Mashru',
@@ -174,7 +182,6 @@ const account = {
         //console.log(this.movements.slice(-1));
         return this.movements.slice(-1).pop();
     },
-
     set latest(mov) {
         this.movements.push(mov)
     }
@@ -183,4 +190,7 @@ const account = {
 console.log(account.latest);
 
 account.latest = 50;
-console.log(account.movements);
+console.log(account.movements);*/
+
+// 210. Static Methods
+// ----------- in the top --------------
