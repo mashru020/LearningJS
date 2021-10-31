@@ -198,7 +198,7 @@ console.log(account.movements);*/
 // ----------- in the top --------------
 
 
-// 211. Object.create
+/*// 211. Object.create
 const PersonProto = {
     ccalcAge() {
         console.log(2021 - this.birthYear);
@@ -218,6 +218,38 @@ steven.ccalcAge();
 console.log(steven.__proto__ === PersonProto);
 const sarah = Object.create(PersonProto);
 sarah.init('Sarah', 1979);
-sarah.ccalcAge();
+sarah.ccalcAge();*/
 
 
+// 212. Coding Challenge #2
+
+class Car {
+    constructor(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    }
+    accelerate() {
+        this.speed += 10;
+        console.log(`${this.make} going at ${this.speed} km/h`);
+    }
+    break() {
+        this.speed -= 5;
+        console.log(`${this.make} going at ${this.speed} km/h`);
+        
+    }
+    get speedUS() {
+        return this.speed/1.6;
+    }
+    set speedUS(speed) {
+        this.speed = speed *1.6;
+    }
+}
+
+const ford = new Car('FORD' , 120 );
+console.log(ford.speedUS);
+ford.accelerate();
+ford.accelerate();
+ford.accelerate();
+ford.break();
+ford.speedUS = 50;
+console.log(ford);
