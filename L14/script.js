@@ -221,7 +221,7 @@ sarah.init('Sarah', 1979);
 sarah.ccalcAge();*/
 
 
-// 212. Coding Challenge #2
+/*// 212. Coding Challenge #2
 
 class Car {
     constructor(make, speed) {
@@ -252,4 +252,55 @@ ford.accelerate();
 ford.accelerate();
 ford.break();
 ford.speedUS = 50;
-console.log(ford);
+console.log(ford);*/
+
+// 213. Inheritance between Classes : Constructor Functions
+
+const Person = function (firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+};
+
+Person.prototype.calcAge = function() {
+    console.log(2021 - this.birthYear);
+};
+
+// const Student = function(firstName, birthYear, course) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//     this.course = course;
+// }// 
+
+// error
+const Student = function(firstName, birthYear, course) {
+    //Person(firstName, birthYear); // dose not work because,call person constructor function as a regular function, not using new operator - give undefined
+    Person.call(this, firstName, birthYear); // 'this' poit to new studetn object
+    this.course = course;
+}
+
+// Student.prototype = Person.prototype //this will not work, we want to inherit , not the same prototype -> so we have to use Object.create
+
+// linking prototype
+Student.prototype = Object.create(Person.prototype); //return empty object and if we write this after other method, this will override everything.
+
+Student.prototype.introduce = function() {
+    console.log(`My name is ${this.firstName} and I study ${this.course}`);
+}
+
+const mike = new Student('Mike', 2000, 'CSE');
+
+console.log(mike);
+mike.introduce();
+mike.calcAge();
+
+console.log(mike.__proto__);
+console.log(mike.__proto__.__proto__);
+
+console.log(mike instanceof Student);
+console.log(mike instanceof Person);
+console.log(mike instanceof Object);
+
+console.dir(Student.prototype.constructor);
+
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
