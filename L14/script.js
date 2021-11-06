@@ -342,7 +342,7 @@ console.log(tesla);
 tesla.accelerate();
 tesla.break();*/
 
-// 215. Inheritance between classes and ES6 classes
+/*// 215. Inheritance between classes and ES6 classes
 
 class PersionCl {
     constructor(fullName, birthYear) {
@@ -395,4 +395,31 @@ class StudentCl extends PersionCl {
 
 const martha = new StudentCl ('Marth Jones', 1992, 'CSE');
 martha.introduce();
-martha.calcAge();
+martha.calcAge();*/
+
+// 216. Inheritance Between "Classes" : Object.create
+const PersonProto = {
+    calcAge() {
+        console.log(2021 - this.birthYear);
+    },
+
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    },
+};
+const steven = Object.create(PersonProto);
+
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function(firstName, birthYear, course) {
+    PersonProto.init.call(this, firstName, birthYear);
+    this.course = course;
+}
+StudentProto.introduce = function() {
+    console.log(`My name is ${this.firstName} and I study ${this.course}`);
+}
+
+const jay = Object.create(StudentProto);
+jay.init('Jay', 2001, 'CSE');
+jay.introduce();
+jay.calcAge();
