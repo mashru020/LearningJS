@@ -305,7 +305,7 @@ console.dir(Student.prototype.constructor);
 Student.prototype.constructor = Student;
 console.dir(Student.prototype.constructor);*/
 
-// 214. Coding Challenge #3
+/*// 214. Coding Challenge #3
 const Car = function (make, speed) {
     this.make = make;
     this.speed = speed;
@@ -340,4 +340,59 @@ const tesla =new EV("Tesla", 120, 23);
 tesla.chargeBattery(90);
 console.log(tesla);
 tesla.accelerate();
-tesla.break();
+tesla.break();*/
+
+// 215. Inheritance between classes and ES6 classes
+
+class PersionCl {
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
+        this.birthYear = birthYear;
+
+    }
+
+    //Instance Method
+    calcAge() {
+        console.log(2021 - this.birthYear);
+    }
+
+    greet() {
+        console.log(`Hey ${this.fullName}`);
+    }
+
+    get age() {
+        return 2021 - this.birthYear;
+    }
+
+    set fullName(name) {
+        if(name.includes(' ')) this._fullName = name ;
+        else alert(`${name} is not a full name!`);
+    }
+
+    get fullName() {
+        return this._fullName;
+    }
+
+    // statuc method 
+    static hey() {
+        console.log('Hey there 👋');
+    }
+}
+
+class StudentCl extends PersionCl {
+    constructor(fullName, birthYear, course) {
+        // Always needs to happen first!
+        super(fullName, birthYear);
+        this.course = course;
+    }
+    introduce() {
+        console.log(`My name is ${this.fullName} and I study ${this.course}`);
+    }
+    calcAge() {
+        console.log(`I'm ${2021 - this.birthYear} years old,  but as a student I feel more like ${2021 - this.birthYear + 10}`);
+    }
+}
+
+const martha = new StudentCl ('Marth Jones', 1992, 'CSE');
+martha.introduce();
+martha.calcAge();
