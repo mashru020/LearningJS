@@ -424,7 +424,7 @@ jay.init('Jay', 2001, 'CSE');
 jay.introduce();
 jay.calcAge();*/
 
-// 217. Another Class Example
+/*// 217. Another Class Example
 
 class Account {
     constructor(owner, currency, pin) {
@@ -479,4 +479,88 @@ console.log(acc1);
 
 // 218. Encapsulation Protected Properties and methods
 console.log(acc1.getMovements());
-console.log(acc1._pin);
+console.log(acc1._pin);*/
+
+// 219. Encapsulation: Private Class Filds and Methods
+
+// Public fields
+// Private fields
+// Public methods
+// Private methods
+// (there is also the static version)
+
+class Account {
+    // 1. Public fields (instances)
+    locale = navigator.language;
+    // _movements = [];
+
+    // 2. Private fields
+     #movements = [];
+     #pin;
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+        // Protected property
+        this.#pin = pin;
+
+        console.log(`Thanks for opening an account, ${owner}`);
+    }
+
+    // 3. Public methods
+    // Public interface
+    getMovements() {
+        // return this._movements;
+        return this.#movements;
+    }
+
+    deposit(val) {
+        // this._movements.push(val);
+        this.#movements.push(val);
+    }
+
+    withdraw(val) {
+        this.deposit(-val);
+    }
+
+    // 4.Private methods
+    _approveLoan(val) {
+        return true;
+    }
+
+    requestLoan(val) {
+        if(this._approveLoan(val)) { 
+            this.deposit(val);
+            console.log(`Loan approved`);
+        }
+    }
+    
+    // static version
+    static helper() {
+        console.log(`Helper`);
+    }
+
+    // 4.Private methods
+    //  #approveLoan(val) {
+    //     return true;
+    // }
+}
+
+const acc1 = new Account('Mashru', 'EUR', 1111);
+console.log(acc1);
+
+// will work but not a proper way
+// acc1._movements.push(250);
+// acc1._movements.push(-140);
+
+acc1.deposit(250);
+acc1.withdraw(140);
+
+acc1.requestLoan(1000);
+console.log(acc1.getMovements());
+console.log(acc1);
+// console.log(acc1.#pin); //private
+// console.log(acc1.#movements); //private - cannot access outside of the class.
+//console.log(acc1.#approveLoan(12));
+
+//acc1.helper(); //error -> olny work with class
+Account.helper(); // static version
