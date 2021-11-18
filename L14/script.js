@@ -516,10 +516,12 @@ class Account {
     deposit(val) {
         // this._movements.push(val);
         this.#movements.push(val);
+        return this; //for chaining 
     }
 
     withdraw(val) {
         this.deposit(-val);
+        return this //for chaining
     }
 
     // 4.Private methods
@@ -531,6 +533,7 @@ class Account {
         if(this._approveLoan(val)) { 
             this.deposit(val);
             console.log(`Loan approved`);
+            return this; //for chaingin
         }
     }
     
@@ -564,3 +567,7 @@ console.log(acc1);
 
 //acc1.helper(); //error -> olny work with class
 Account.helper(); // static version
+
+// 220. Chaining Methods
+acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+console.log(acc1.getMovements());
