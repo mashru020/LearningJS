@@ -623,3 +623,5 @@ tesla.break();
 tesla.accelerate().accelerate().accelerate().break().chargeBattery(50).accelerate();
 
 console.log(tesla.speedUS);
+
+// ========================================   End   =====================================
