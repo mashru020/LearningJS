@@ -481,7 +481,7 @@ console.log(acc1);
 console.log(acc1.getMovements());
 console.log(acc1._pin);*/
 
-// 219. Encapsulation: Private Class Filds and Methods
+/*// 219. Encapsulation: Private Class Filds and Methods
 
 // Public fields
 // Private fields
@@ -570,4 +570,56 @@ Account.helper(); // static version
 
 // 220. Chaining Methods
 acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
-console.log(acc1.getMovements());
+console.log(acc1.getMovements());*/
+
+
+// 221. Coding Challenge #4
+class CarCl{
+    constructor(make, speed){
+        this.make = make;
+        this.speed = speed;
+    }
+    accelerate() {
+        this.speed += 10;
+        console.log(`${this.make} going at ${this.speed} km/h`);
+    }
+    break() {
+        this.speed += 10;
+        console.log(`${this.make} going at ${this.speed} km/h`);
+        return this;
+    }
+    get speedUS() {
+        return this.speed / 1.6;
+    }
+    set speedUS(speed) {
+        this.speed = speed * 1.6;
+    }
+}
+class EVCL  extends CarCl{
+    // private field
+    #charge;
+
+    constructor(make, speed, charge){
+        super(make, speed);
+        this.#charge = charge;
+    }
+    chargeBattery(chargeTo) {
+        this.#charge = chargeTo;
+        return this;
+    }
+    accelerate() {
+        this.speed += 20 ;
+        this.#charge --;
+        console.log(`${this.make} going at at ${this.speed} km/h, with a charge of ${this.#charge}%`);
+        return this;
+    }
+}
+const tesla =new EVCL("Tesla", 120, 23);
+tesla.chargeBattery(90);
+console.log(tesla);
+tesla.accelerate();
+tesla.break();
+//console.log(tesla.#charge);
+tesla.accelerate().accelerate().accelerate().break().chargeBattery(50).accelerate();
+
+console.log(tesla.speedUS);
