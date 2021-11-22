@@ -13,8 +13,8 @@ const inputElevation = document.querySelector('.form__input--elevation');
 
 
 // 226. Using the Geolocation api
-let map, mapEvent;
-if(navigator.geolocation){
+ let map, mapEvent;
+/*if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition(function(position){
     const {latitude} = position.coords;
     const {longitude} = position.coords;
@@ -69,10 +69,10 @@ if(navigator.geolocation){
         alert('Could not get your position');
 
     })
-};
+};*/
 
 
-form.addEventListener('submit', function(e) {
+/*form.addEventListener('submit', function(e) {
     e.preventDefault();
     
     // clear input field
@@ -97,11 +97,83 @@ form.addEventListener('submit', function(e) {
     .openPopup();
     // form.classList.add('hidden');
     
-});
+});*/
 
 // change input field with selecting type
-inputType.addEventListener('change', function() {
-    inputElevation.closest('.form__row ').classList.toggle('form__row--hidden');
-    inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
-});
+
 // console.log(firstName);
+
+// 231. Refactoring for porject architecture
+class App {
+    #map;
+    #mapEvent;
+    constructor() {
+        this._getPosition();
+        form.addEventListener('submit', this._newWorkout.bind(this));
+        inputType.addEventListener('change', this._toggleElevationField);
+    }
+    _getPosition() {
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(
+                this._loadMap.bind(this),
+                function() {
+                    alert('Could not get your position');
+                }
+            );
+        }
+    }
+
+    _loadMap( position ) {
+        const {latitude} = position.coords;
+        const {longitude} = position.coords;
+
+        const coords = [latitude, longitude];
+
+        this.#map = L.map('map').setView(coords, 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+            attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(this.#map);
+
+        // Handling clicks on map
+        this.#map.on('click', this._showForm.bind(this));
+    }
+
+    _showForm(mapE) {
+        this.#mapEvent = mapE;
+        form.classList.remove('hidden');
+        inputDistance.focus();
+    }
+
+    _toggleElevationField() {
+        inputElevation.closest('.form__row ').classList.toggle('form__row--hidden');
+        inputCadence.closest('.form__row').classList.toggle('form__row--hidden');     
+    }
+
+    _newWorkout(e) {
+        e.preventDefault();
+            
+        // clear input field
+        inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
+        
+        // Display marker
+        const { lat, lng } = this.#mapEvent.latlng;
+        L.marker([lat, lng])
+            .addTo(this.#map)
+            .bindPopup(
+                L.popup({
+                    maxWitdh: 250,
+                    minWidth: 50,
+                    autoClose: false,
+                    closeOnClick: false,
+                    className: 'running-popup',
+                })
+            )
+            .setPopupContent('Workout')
+            .openPopup();
+        form.classList.add('hidden');
+    }
+
+}
+const app = new App();
