@@ -31,9 +31,10 @@ class Workout {
 
         this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${months[this.date.getMonth()]} ${this.date.getDate()}`;
     }
-    click() {
-        this.clicks++;
-    }
+    // for local storage will not work.
+    // click() {
+    //     this.clicks++;
+    // }
 }
 
 class Running extends Workout {
@@ -172,7 +173,13 @@ class App {
     #mapZoomLevel = 13;
     constructor() {
         
+        // get user position
         this._getPosition();
+
+        // get data from local storage
+        this._getLocalStorage();
+
+        // Attach event handlers
         form.addEventListener('submit', this._newWorkout.bind(this));
         inputType.addEventListener('change', this._toggleElevationField);
         containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
@@ -203,6 +210,11 @@ class App {
 
         // Handling clicks on map
         this.#map.on('click', this._showForm.bind(this));
+
+        // for render marker from local storage
+        this.#workouts.forEach(work => {
+            this._renderWorkoutMarker(work);
+        });
     }
 
     _showForm(mapE) {
@@ -228,7 +240,7 @@ class App {
     _newWorkout(e) {
 
         const validInputs = (...inputs) => inputs.every( inp => Number.isFinite(inp));
-        const allPositive = (...inputs) => inputs.every( inp => inp >= 0 );
+        const allPositive = (...inputs) => inputs.every( inp => inp > 0 );
         e.preventDefault();
         // 233. Creating a new workout 
 
@@ -247,7 +259,7 @@ class App {
         if( type === 'running') {
             
             const cadence = +inputCadence.value;
-
+            console.log(cadence);
             // check if data is valid
             if(
                 // !Number.isFinite(distance) || 
@@ -267,7 +279,7 @@ class App {
             if(
                 !validInputs(duration, distance, elevation) ||
                 !allPositive(distance,duration)
-            ) 
+            )
             return alert('Inputs have to be positive numbers!');
 
             workout = new Cycling([lat, lng], distance, duration, elevation);
@@ -284,6 +296,11 @@ class App {
         // render workout on list
         this._rnederWorkout(workout);
         this._hideForm();
+
+        // 236. Work with local storage
+
+        // set local storage to all workouts
+        this._setLocalStorage();
         
     }
 
@@ -371,8 +388,47 @@ class App {
             }
         });
 
-        // using publick interface
-        workout.click();
+        // using public interface
+        //workout.click();
+    }
+
+    // 236. Work with local storage
+    _setLocalStorage() {
+        localStorage.setItem('workout', JSON.stringify(this.#workouts));
+    }
+
+    _getLocalStorage() {
+       const data = JSON.parse(localStorage.getItem('workout'));
+       console.log(data);
+       if(!data) return;
+       this.#workouts = data;
+
+    
+       this.#workouts.forEach(work => {
+           this._rnederWorkout(work);
+
+           //    move it to the end of map _loadMap , because marker will trying to set before the map load.
+           //this._renderWorkoutMarker(work);
+       });
+    }
+
+    reset() {
+        localStorage.removeItem('workout');
+        location.reload();
+
     }
 }
 const app = new App();
+
+
+// 137. Final considaration
+// 1. Ability to edit a workout
+// 2. Ability to delete a workout
+// 3. Ability to delete all workouts
+// 4. Ability to sort workouts by a certain field( e.g. distance)
+// 5. Re-build Runnin and Cycling objects coming from Local Storage
+// 6. More reailstic error and confirmation messages;
+// 7. Ability of position the map to show all workouts -> hard
+// 8. Ability to draw lines and shapes instead of just points -> hard
+// 9. Geocode location form coordinates("Run in aro, Portugal") -> after asynchronous js section
+// 10. Display weather data for workout time and pace -> after asynchronous js section
