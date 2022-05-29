@@ -1,10 +1,22 @@
-// let js = "amazing";
+ // let js = "amazing";
 // console.log(40 + 8 + 23 - 10);
 // 10 Values and variables
 
 /*console.log("Mashru");
 console.log("23");
 
+// variable name can't start with number
+// let 3years = 3;      //error
+
+// only letter, number, underscore and $ can be in variabel name 
+// let jonas&matilda = "JM";            //error
+
+// can't use reserved js keyword as variable
+// new, function 
+// but we can use $new
+
+//  First letter uppercase for object  and all uppercase for const value - it is convention 
+//  variabel name should be discriptive 
 
 // variable name conventions
 let firstName = "Mashru";
